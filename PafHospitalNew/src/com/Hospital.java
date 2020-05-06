@@ -81,8 +81,8 @@ public class Hospital extends HttpServlet {
 				String hospital_address_lane2 = rs.getString("hospital_address_lane2");
 				String hospital_address_lane3 = rs.getString("hospital_address_lane3");
 				String hospital_city = rs.getString("hospital_city");
-				String Tel = rs.getString("tel");
-				String Email = rs.getString("email");
+				String tel = rs.getString("tel");
+				String email = rs.getString("email");
 				
 				// Add into the html table
 				output += "<tr><td><input id='hidHospitalIDUpdate' name='hidHospitalIDUpdate' type='hidden' value='" + hospital_id + "'>" + hospital_name + "</td>";
@@ -93,10 +93,11 @@ public class Hospital extends HttpServlet {
 				output += "<td>" + hospital_address_lane2 + "</td>";
 				output += "<td>" + hospital_address_lane3 + "</td>";
 				output += "<td>" + hospital_city + "</td>";
-				output += "<td>" + Tel + "</td>";
-				output += "<td>" + Email + "</td>";
+				output += "<td>" + tel + "</td>";
+				output += "<td>" + email + "</td>";
 				// buttons
-				output += "<td><input name='btnUpdate' type='button' value='Update' class='btnUpdate btn btn-secondary'></td><td><input name='btnRemove' type='button' value='Remove' class='btnRemove btn btn-danger' data-hospitalid='"
+				output += "<td><input name='btnUpdate' type='button' value='Update' class='btnUpdate btn btn-secondary'></td>"
+						+ "<td><input name='btnRemove' type='button' value='Remove' class='btnRemove btn btn-danger' data-hospitalid='"
 						 + hospital_id + "'>" + "</td></tr>";
 				
 				
@@ -112,7 +113,7 @@ public class Hospital extends HttpServlet {
 		return output;
 	}
 
-	public String updateHospital(String hos_Id, String  hos_name, String address_no,  String address_lane1, String address_lane2, String address_lane3, String city, String tel, String email) {
+	public String updateHospital(String ID, String  hos_name, String address_no,  String address_lane1, String address_lane2, String address_lane3, String city, String tel, String email) {
 		String output = "";
 		try {
 			Connection con = connect();
@@ -131,7 +132,7 @@ public class Hospital extends HttpServlet {
 			preparedStmt.setString(6, city);
 			preparedStmt.setString(7, tel);
 			preparedStmt.setString(8, email);
-			preparedStmt.setInt(9, Integer.parseInt(hos_Id));
+			preparedStmt.setInt(9, Integer.parseInt(ID));
 			// execute the statement
 			preparedStmt.execute();
 			con.close();

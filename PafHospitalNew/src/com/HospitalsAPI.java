@@ -45,8 +45,14 @@ public class HospitalsAPI extends HttpServlet {
 			throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		// doGet(request, response);
-		String output = hosObj.insertHopital(request.getParameter("hospital_name"), request.getParameter("hospital_address_no"),
-				request.getParameter("hospital_address_lane1"), request.getParameter("hospital_address_lane2"),  request.getParameter("hospital_address_lane3"),  request.getParameter("hospital_city"), request.getParameter("tel"), request.getParameter("email"));
+		String output = hosObj.insertHopital(request.getParameter("hospital_name"),
+				request.getParameter("hospital_address_no"),
+				request.getParameter("hospital_address_lane1"),
+				request.getParameter("hospital_address_lane2"),  
+				request.getParameter("hospital_address_lane3"), 
+				request.getParameter("hospital_city"),
+				request.getParameter("tel"), 
+				request.getParameter("email"));
 		response.getWriter().write(output);
 	}
 
@@ -58,8 +64,15 @@ public class HospitalsAPI extends HttpServlet {
 		// TODO Auto-generated method stub
 
 		Map paras = getParasMap(request);
-		String output = hosObj.updateHospital(paras.get("hidHospitalIdSave").toString(), paras.get("hospital_name").toString(), paras.get("hospital_address_no").toString(),
-				paras.get("hospital_address_lane1").toString(), paras.get("hospital_address_lane2").toString(), paras.get("hospital_address_lane3").toString(),  paras.get("hospital_city").toString(), paras.get("tel").toString(), paras.get("email").toString());
+		String output = hosObj.updateHospital(paras.get("hidHospitalIDSave").toString(),
+				paras.get("hospital_name").toString(),
+				paras.get("hospital_address_no").toString(),
+				paras.get("hospital_address_lane1").toString(),
+				paras.get("hospital_address_lane2").toString(),
+				paras.get("hospital_address_lane3").toString(), 
+				paras.get("hospital_city").toString(),
+				paras.get("tel").toString(),
+				paras.get("email").toString());
 		response.getWriter().write(output);
 	}
 
