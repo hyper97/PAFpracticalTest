@@ -94,38 +94,52 @@ $(document).on(
 		"click",
 		".btnUpdate",
 		function(event) {
-			$("#hidItemIDSave").val(
-					$(this).closest("tr").find('#hidItemIDUpdate').val());
-			$("#itemCode").val($(this).closest("tr").find('td:eq(0)').text());
-			$("#itemName").val($(this).closest("tr").find('td:eq(1)').text());
-			$("#itemPrice").val($(this).closest("tr").find('td:eq(2)').text());
-			$("#itemDesc").val($(this).closest("tr").find('td:eq(3)').text());
+			$("#hidHospitalIDSave").val(
+					$(this).closest("tr").find('#hidHospitalIDUpdate').val());
+			$("#hospital_name").val($(this).closest("tr").find('td:eq(0)').text());
+			$("#hospital_address_no").val($(this).closest("tr").find('td:eq(1)').text());
+			$("#hospital_address_lane1").val($(this).closest("tr").find('td:eq(2)').text());
+			$("#hospital_address_lane2").val($(this).closest("tr").find('td:eq(3)').text());
+			$("#hospital_address_lane3").val($(this).closest("tr").find('td:eq(4)').text());
+			$("#hospital_city").val($(this).closest("tr").find('td:eq(5)').text());
+			$("#tel").val($(this).closest("tr").find('td:eq(6)').text());
+			$("#email").val($(this).closest("tr").find('td:eq(7)').text());
 		});
 
 // CLIENTMODEL=========================================================================
 function validateHospitalForm() {
-	// CODE
-	if ($("#hospital_name").val().trim() == "") {
-		return "Insert Item Code.";
-	}
+	
 	// NAME
-	if ($("#itemName").val().trim() == "") {
-		return "Insert Item Name.";
+	if ($("#hospital_name").val().trim() == "") {
+		return "Insert Hospital Name.";
 	}
-	// PRICE-------------------------------
-	if ($("#itemPrice").val().trim() == "") {
-		return "Insert Item Price.";
+	// ADDRESS NO
+	if ($("#hospital_address_no").val().trim() == "") {
+		return "Insert Hospital Address No.";
 	}
-	// is numerical value
-	var tmpPrice = $("#itemPrice").val().trim();
-	if (!$.isNumeric(tmpPrice)) {
-		return "Insert a numerical value for Item Price.";
+	// ADDRESS LINE 1
+	if ($("#hospital_address_lane1").val().trim() == "") {
+		return "Insert Address Lane 1.";
 	}
-	// convert to decimal price
-	$("#itemPrice").val(parseFloat(tmpPrice).toFixed(2));
-	// DESCRIPTION------------------------
-	if ($("#itemDesc").val().trim() == "") {
-		return "Insert Item Description.";
+	// ADDRESS LINE 2
+	if ($("#hospital_address_lane2").val().trim() == "") {
+		return "Insert Address Lane 2.";
+	}
+	// ADDRESS LINE 3
+	if ($("#hospital_address_lane3").val().trim() == "") {
+		return "Insert Address Lane 3.";
+	}
+	// HOS CITY
+	if ($("#hospital_city").val().trim() == "") {
+		return "Insert Hospital City.";
+	}
+	// TELPHONE
+	if ($("#tel").val().trim() == "") {
+		return "Insert Hospital Telephone Number.";
+	}
+	// Email
+	if ($("#tel").val().trim() == "") {
+		return "Insert Hospital Email.";
 	}
 	return true;
 }

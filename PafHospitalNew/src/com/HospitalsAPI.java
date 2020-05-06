@@ -45,7 +45,7 @@ public class HospitalsAPI extends HttpServlet {
 			throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		// doGet(request, response);
-		String output = hosObj.insertHopital(null, request.getParameter("hospital_name"), request.getParameter("hospital_address_no"),
+		String output = hosObj.insertHopital(request.getParameter("hospital_name"), request.getParameter("hospital_address_no"),
 				request.getParameter("hospital_address_lane1"), request.getParameter("hospital_address_lane2"),  request.getParameter("hospital_address_lane3"),  request.getParameter("hospital_city"), request.getParameter("Tel"), request.getParameter("Email"));
 		response.getWriter().write(output);
 	}
@@ -58,7 +58,7 @@ public class HospitalsAPI extends HttpServlet {
 		// TODO Auto-generated method stub
 
 		Map paras = getParasMap(request);
-		String output = hosObj.updateHospital(null, paras.get("hospital_name").toString(), paras.get("hospital_address_no").toString(),
+		String output = hosObj.updateHospital(paras.get("hidHospitalIdSave").toString(), paras.get("hospital_name").toString(), paras.get("hospital_address_no").toString(),
 				paras.get("hospital_address_lane1").toString(), paras.get("hospital_address_lane2").toString(), paras.get("hospital_address_lane3").toString(),  paras.get("hospital_city").toString(), paras.get("Tel").toString(), paras.get("Email").toString());
 		response.getWriter().write(output);
 	}
@@ -70,7 +70,7 @@ public class HospitalsAPI extends HttpServlet {
 			throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		Map paras = getParasMap(request);
-		 String output = hosObj.deleteHospital(paras.get("hospital_id").toString());
+		 String output = hosObj.deleteHospital(paras.get("hospital_ID").toString());
 		response.getWriter().write(output); 
 		
 	}

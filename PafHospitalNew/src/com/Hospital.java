@@ -16,14 +16,14 @@ public class Hospital extends HttpServlet {
 			Class.forName("com.mysql.cj.jdbc.Driver");
 
 			// Provide the correct details: DBServer/DBName, username, password
-			con = DriverManager.getConnection("jdbc:mysql://127.0.0.1:3306/hospitals?useTimezone=true&serverTimezone=UTC","root", "");
+			con = DriverManager.getConnection("jdbc:mysql://127.0.0.1:3306/healthcare?useTimezone=true&serverTimezone=UTC","root", "");
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
 		return con;
 	}
 
-	public String insertHopital(Integer hos_id, String  hos_name, String address_no,  String address_lane1, String address_lane2, String address_lane3, String city, String tel, String email) {
+	public String insertHopital( String  hos_name, String address_no,  String address_lane1, String address_lane2, String address_lane3, String city, String tel, String email) {
 		String output = "";
 		try {
 			Connection con = connect();
@@ -31,11 +31,11 @@ public class Hospital extends HttpServlet {
 				return "Error while connecting to the database for inserting.";
 			}
 			// create a prepared statement
-			String query = " insert into hospitals(`hospital_id`,`hospital_name`,`hospital_address_no`,`hospital_address_lane1`,`hospital_address_lane2`,`hospital_address_lane3`,`hospital_city`,`tel`,`email`)"
+			String query = " insert into hospitals(`hospital_ID`,`hospital_name`,`hospital_address_no`,`hospital_address_lane1`,`hospital_address_lane2`,`hospital_address_lane3`,`hospital_city`,`tel`,`email`)"
 					+ " values (?, ?, ?, ?, ?, ?, ?, ?, ?)";
 			PreparedStatement preparedStmt = con.prepareStatement(query);
 			// binding values
-			preparedStmt.setInt(1, hos_id);
+			preparedStmt.setInt(1, 0);
 			preparedStmt.setString(2, hos_name);
 			preparedStmt.setString(3, address_no);
 			preparedStmt.setString(4, address_lane1);
@@ -85,11 +85,9 @@ public class Hospital extends HttpServlet {
 				String Email = rs.getString("Email");
 				
 				// Add into the html table
-				output += "<tr><td><input id='hidHosIDUpdate' name='hidHosIDUpdate' type='hidden' value='" + hospital_ID + "'>" + hospital_name + "</td>";
+				output += "<tr><td><input id='hidHospitalIDUpdate' name='hidHospitalIDUpdate' type='hidden' value='" + hospital_ID + "'>" + hospital_name + "</td>";
 				
-				/*output += "<tr><td><input id=\"hidItemIDUpdate\"name=\"hidItemIDUpdate\"type=\"hidden\" value=\""
-						+ itemID + "\">" + itemCode + "</td>";*/
-
+				
 				output += "<td>" + hospital_address_no + "</td>";
 				output += "<td>" + hospital_address_lane1 + "</td>";
 				output += "<td>" + hospital_address_lane2 + "</td>";
@@ -98,15 +96,11 @@ public class Hospital extends HttpServlet {
 				output += "<td>" + Tel + "</td>";
 				output += "<td>" + Email + "</td>";
 				// buttons
-				output += "<td><input name='btnUpdate' type='button' value='Update' class='btnUpdate btn btn-secondary'></td><td><input name='btnRemove' type='button' value='Remove' class='btnRemove btn btn-danger' data-hospitalID='"
+				output += "<td><input name='btnUpdate' type='button' value='Update' class='btnUpdate btn btn-secondary'></td><td><input name='btnRemove' type='button' value='Remove' class='btnRemove btn btn-danger' data-hospital_ID='"
 						 + hospital_ID + "'>" + "</td></tr>";
 				
 				
 				
-				
-				/*output += "<td><input name=\"btnUpdate\"type=\"button\" value=\"Update\"class=\" btnUpdate btn btn-secondary\"></td>"
-						+ "<td><form method=\"post\" action=\"items.jsp\"><input name=\"btnRemove\" type=\"submit\"value=\"Remove\" class=\"btn btn-danger\"><input name=\"hidItemIDDelete\" type=\"hidden\"value=\""
-						+ itemID + "\">" + "</form></td></tr>";*/
 			}
 			con.close();
 			// Complete the html table
@@ -118,7 +112,7 @@ public class Hospital extends HttpServlet {
 		return output;
 	}
 
-	public String updateHospital(Integer hos_id, String  hos_name, String address_no,  String address_lane1, String address_lane2, String address_lane3, String city, String tel, String email) {
+	public String updateHospital(String hos_Id, String  hos_name, String address_no,  String address_lane1, String address_lane2, String address_lane3, String city, String tel, String email) {
 		String output = "";
 		try {
 			Connection con = connect();
@@ -126,7 +120,7 @@ public class Hospital extends HttpServlet {
 				return "Error while connecting to the database for updating.";
 			}
 			// create a prepared statement
-			String query = "UPDATE hospitals SET hospital_name=?,hospital_address_no=?,hospital_address_lane1=?,hospital_address_lane2=?,hospital_address_lane3=?,hospital_city=?,tel=?email=?WHERE hospital_id=?";
+			String query = "UPDATE hospitals SET hospital_name=?,hospital_address_no=?,hospital_address_lane1=?,hospital_address_lane2=?,hospital_address_lane3=?,hospital_city=?,tel=?,email=?WHERE hospital_ID=?";
 			PreparedStatement preparedStmt = con.prepareStatement(query);
 			// binding values
 			preparedStmt.setString(1, hos_name);
@@ -137,7 +131,7 @@ public class Hospital extends HttpServlet {
 			preparedStmt.setString(6, city);
 			preparedStmt.setString(7, tel);
 			preparedStmt.setString(8, email);
-			preparedStmt.setInt(9, hos_id);
+			preparedStmt.setInt(9, Integer.parseInt(hos_Id));
 			// execute the statement
 			preparedStmt.execute();
 			con.close();
@@ -153,7 +147,7 @@ public class Hospital extends HttpServlet {
 		return output;
 	}
 
-	public String deleteHospital(String hospital_id) {
+	public String deleteHospital(String hospital_ID) {
 		String output = "";
 		try {
 			Connection con = connect();
@@ -164,7 +158,7 @@ public class Hospital extends HttpServlet {
 			String query = "delete from hospitals where hospital_id=?";
 			PreparedStatement preparedStmt = con.prepareStatement(query);
 			// binding values
-			preparedStmt.setInt(1, Integer.parseInt(hospital_id));
+			preparedStmt.setInt(1, Integer.parseInt(hospital_ID));
 			// execute the statement
 			preparedStmt.execute();
 			con.close();

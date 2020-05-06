@@ -26,8 +26,6 @@
 				<h1>Hospitals Management</h1>
 
 				<form id="formHospital" name="formHospital" method="post" action="items.jsp">
-					Hospital ID : <input id="hospital_id" name="hospital_id" type="text"
-						class="form-control form-control-sm"> <br> 
 					Hospital name : <input id="hospital_name" name="hospital_name" type="text"
 						class="form-control form-control-sm"> <br> 
 					Hospital Address No. : <input id="hospital_address_no" name="hospital_address_no" type="text"
