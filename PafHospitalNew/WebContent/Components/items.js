@@ -69,13 +69,26 @@ $(document).on("click", ".btnRemove", function(event) {
 });
 
 //DELETE==========================================
+$(document).on("click", ".btnRemove", function(event) {
+	$.ajax({
+		url : "HospitalsAPI",
+		type : "DELETE",
+		data : "hospital_id=" + $(this).data("hospitalid"),
+		dataType : "text",
+		complete : function(response, status) {
+			onHospitalDeleteComplete(response.responseText, status);
+		}
+	});
+});
+
+
 function onHospitalDeleteComplete(response, status) {
 	if (status == "success") {
 		var resultSet = JSON.parse(response);
 		if (resultSet.status.trim() == "success") {
 			$("#alertSuccess").text("Successfully deleted.");
 			$("#alertSuccess").show();
-			$("#divItemsGrid").html(resultSet.data);
+			$("#divUsersGrid").html(resultSet.data);
 		} else if (resultSet.status.trim() == "error") {
 			$("#alertError").text(resultSet.data);
 			$("#alertError").show();
@@ -84,7 +97,7 @@ function onHospitalDeleteComplete(response, status) {
 		$("#alertError").text("Error while deleting.");
 		$("#alertError").show();
 	} else {
-		$("#alertError").text("Unknown error while deleting..");
+		$("#alertError").text("Unknown error while deleting hospital..");
 		$("#alertError").show();
 	}
 }

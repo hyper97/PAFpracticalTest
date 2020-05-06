@@ -70,7 +70,7 @@ public class HospitalsAPI extends HttpServlet {
 			throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		Map paras = getParasMap(request);
-		 String output = hosObj.deleteHospital(paras.get("hospital_ID").toString());
+		 String output = hosObj.deleteHospital(paras.get("hospital_id").toString());
 		response.getWriter().write(output); 
 		
 	}

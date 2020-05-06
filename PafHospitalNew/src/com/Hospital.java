@@ -23,7 +23,7 @@ public class Hospital extends HttpServlet {
 		return con;
 	}
 
-	public String insertHopital( String  hos_name, String address_no,  String address_lane1, String address_lane2, String address_lane3, String city, String tel, String email) {
+	public String insertHopital(String hos_name, String address_no,  String address_lane1, String address_lane2, String address_lane3, String city, String tel, String email) {
 		String output = "";
 		try {
 			Connection con = connect();
@@ -68,13 +68,13 @@ public class Hospital extends HttpServlet {
 				return "Error while connecting to the database for reading.";
 			}
 			// Prepare the html table to be displayed
-			output = "<table border=\"1\"><th>Hospital Name</th><th>Hospital Address No.</th><th>Hospital Address Lane 1</th><th>Hospital Address Lane 2</th><th>Hospital Address Lane 3</th><th>City</th><th>Tel</th><th>Email</th><th>Update</th><th>Remove</th></tr>";
+			output = "<table border=\'1\'><th>Hospital Name</th><th>Hospital Address No.</th><th>Hospital Address Lane 1</th><th>Hospital Address Lane 2</th><th>Hospital Address Lane 3</th><th>City</th><th>Tel</th><th>Email</th><th>Update</th><th>Remove</th></tr>";
 			String query = "select * from hospitals";
 			Statement stmt = con.createStatement();
 			ResultSet rs = stmt.executeQuery(query);
 			// iterate through the rows in the result set
 			while (rs.next()) {
-				String hospital_ID = Integer.toString(rs.getInt("hospital_ID"));
+				String hospital_id = Integer.toString(rs.getInt("hospital_id"));
 				String hospital_name = rs.getString("hospital_name");
 				String hospital_address_no = rs.getString("hospital_address_no");
 				String hospital_address_lane1 = rs.getString("hospital_address_lane1");
@@ -85,7 +85,7 @@ public class Hospital extends HttpServlet {
 				String Email = rs.getString("Email");
 				
 				// Add into the html table
-				output += "<tr><td><input id='hidHospitalIDUpdate' name='hidHospitalIDUpdate' type='hidden' value='" + hospital_ID + "'>" + hospital_name + "</td>";
+				output += "<tr><td><input id='hidHospitalIDUpdate' name='hidHospitalIDUpdate' type='hidden' value='" + hospital_id + "'>" + hospital_name + "</td>";
 				
 				
 				output += "<td>" + hospital_address_no + "</td>";
@@ -96,8 +96,8 @@ public class Hospital extends HttpServlet {
 				output += "<td>" + Tel + "</td>";
 				output += "<td>" + Email + "</td>";
 				// buttons
-				output += "<td><input name='btnUpdate' type='button' value='Update' class='btnUpdate btn btn-secondary'></td><td><input name='btnRemove' type='button' value='Remove' class='btnRemove btn btn-danger' data-hospital_ID='"
-						 + hospital_ID + "'>" + "</td></tr>";
+				output += "<td><input name='btnUpdate' type='button' value='Update' class='btnUpdate btn btn-secondary'></td><td><input name='btnRemove' type='button' value='Remove' class='btnRemove btn btn-danger' data-hospitalid='"
+						 + hospital_id + "'>" + "</td></tr>";
 				
 				
 				
@@ -120,7 +120,7 @@ public class Hospital extends HttpServlet {
 				return "Error while connecting to the database for updating.";
 			}
 			// create a prepared statement
-			String query = "UPDATE hospitals SET hospital_name=?,hospital_address_no=?,hospital_address_lane1=?,hospital_address_lane2=?,hospital_address_lane3=?,hospital_city=?,tel=?,email=?WHERE hospital_ID=?";
+			String query = "UPDATE hospitals SET hospital_name=?,hospital_address_no=?,hospital_address_lane1=?,hospital_address_lane2=?,hospital_address_lane3=?,hospital_city=?,tel=?,email=?WHERE hospital_id=?";
 			PreparedStatement preparedStmt = con.prepareStatement(query);
 			// binding values
 			preparedStmt.setString(1, hos_name);
@@ -147,7 +147,7 @@ public class Hospital extends HttpServlet {
 		return output;
 	}
 
-	public String deleteHospital(String hospital_ID) {
+	public String deleteHospital(String hospital_id) {
 		String output = "";
 		try {
 			Connection con = connect();
@@ -158,7 +158,7 @@ public class Hospital extends HttpServlet {
 			String query = "delete from hospitals where hospital_id=?";
 			PreparedStatement preparedStmt = con.prepareStatement(query);
 			// binding values
-			preparedStmt.setInt(1, Integer.parseInt(hospital_ID));
+			preparedStmt.setInt(1, Integer.parseInt(hospital_id));
 			// execute the statement
 			preparedStmt.execute();
 			con.close();
