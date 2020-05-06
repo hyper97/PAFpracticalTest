@@ -151,7 +151,7 @@ function validateHospitalForm() {
 		return "Insert Hospital Telephone Number.";
 	}
 	// Email
-	if ($("#tel").val().trim() == "") {
+	if ($("#email").val().trim() == "") {
 		return "Insert Hospital Email.";
 	}
 	return true;

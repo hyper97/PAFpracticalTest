@@ -38,9 +38,9 @@
 						class="form-control form-control-sm"> <br>
 					City : <input id="hospital_city" name="hospital_city" type="text"
 						class="form-control form-control-sm"> <br>
-					Tel : <input id="Tel" name="Tel" type="text"
+					Tel : <input id="tel" name="Tel" type="text"
 						class="form-control form-control-sm"> <br>
-					Email : <input id="Email" name="Email" type="text"
+					Email : <input id="email" name="Email" type="text"
 						class="form-control form-control-sm"> <br>
 					
 					 <input id="btnSave" name="btnSave" type="button" value="Save"

@@ -81,8 +81,8 @@ public class Hospital extends HttpServlet {
 				String hospital_address_lane2 = rs.getString("hospital_address_lane2");
 				String hospital_address_lane3 = rs.getString("hospital_address_lane3");
 				String hospital_city = rs.getString("hospital_city");
-				String Tel = rs.getString("Tel");
-				String Email = rs.getString("Email");
+				String Tel = rs.getString("tel");
+				String Email = rs.getString("email");
 				
 				// Add into the html table
 				output += "<tr><td><input id='hidHospitalIDUpdate' name='hidHospitalIDUpdate' type='hidden' value='" + hospital_id + "'>" + hospital_name + "</td>";

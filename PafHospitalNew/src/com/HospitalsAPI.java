@@ -1,15 +1,15 @@
 package com;
 
 import java.io.IOException;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Scanner;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import java.io.IOException;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Scanner;
 
 /**
  * Servlet implementation class ItemsAPI
@@ -46,7 +46,7 @@ public class HospitalsAPI extends HttpServlet {
 		// TODO Auto-generated method stub
 		// doGet(request, response);
 		String output = hosObj.insertHopital(request.getParameter("hospital_name"), request.getParameter("hospital_address_no"),
-				request.getParameter("hospital_address_lane1"), request.getParameter("hospital_address_lane2"),  request.getParameter("hospital_address_lane3"),  request.getParameter("hospital_city"), request.getParameter("Tel"), request.getParameter("Email"));
+				request.getParameter("hospital_address_lane1"), request.getParameter("hospital_address_lane2"),  request.getParameter("hospital_address_lane3"),  request.getParameter("hospital_city"), request.getParameter("tel"), request.getParameter("email"));
 		response.getWriter().write(output);
 	}
 
@@ -59,7 +59,7 @@ public class HospitalsAPI extends HttpServlet {
 
 		Map paras = getParasMap(request);
 		String output = hosObj.updateHospital(paras.get("hidHospitalIdSave").toString(), paras.get("hospital_name").toString(), paras.get("hospital_address_no").toString(),
-				paras.get("hospital_address_lane1").toString(), paras.get("hospital_address_lane2").toString(), paras.get("hospital_address_lane3").toString(),  paras.get("hospital_city").toString(), paras.get("Tel").toString(), paras.get("Email").toString());
+				paras.get("hospital_address_lane1").toString(), paras.get("hospital_address_lane2").toString(), paras.get("hospital_address_lane3").toString(),  paras.get("hospital_city").toString(), paras.get("tel").toString(), paras.get("email").toString());
 		response.getWriter().write(output);
 	}
 
